@@ -1,3 +1,4 @@
+import { ipcRenderer } from "electron";
 import styled from "styled-components"
 
 const Container = styled.form`
@@ -11,10 +12,9 @@ export default function SearchContainer() {
         event.preventDefault();
         
         const files = Array.from(event.target.elements.fileInput.files) as File[];
+        const urls = files.map((file) => file.path);
 
-        files.map((file: File) => (
-            console.log(`Arquivo selecionado: ${file.path}`)
-        ))
+        ipcRenderer.send("filesSelected", urls);
     };
 
     return (
