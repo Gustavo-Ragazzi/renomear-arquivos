@@ -2,7 +2,7 @@ import { app, BrowserWindow, shell, ipcMain } from 'electron'
 import { release } from 'node:os'
 import { join } from 'node:path'
 import { update } from './update'
-import "../../server/copyFiles"
+import "../../server/server"
 
 // The built directory structure
 //
