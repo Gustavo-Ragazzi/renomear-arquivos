@@ -6,12 +6,12 @@ const Container = styled.main`
     width: 50%;
 `
 
-export default function MainContainer() {
+export default function MainContainer(props: any) {
+    console.log(props.files)
     return (
         <Container>
-            <p>Arquivo 1</p>
-            <p>Arquivo 2</p>
-            <p>Arquivo 3</p>
+            <p>{props.files}</p>
+            <button onClick={() => console.log(props.files)}>Testar</button>
         </Container>
     )
 }

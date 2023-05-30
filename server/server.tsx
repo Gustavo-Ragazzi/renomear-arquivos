@@ -1,1 +1,2 @@
-import "./copyFiles"
+import "./copyFiles";
+import "./readItems";

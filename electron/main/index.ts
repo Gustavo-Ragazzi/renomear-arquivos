@@ -3,6 +3,7 @@ import { release } from 'node:os'
 import { join } from 'node:path'
 import { update } from './update'
 import "../../server/server"
+import { readItemsFromFolder } from "../../server/readItems";
 
 // The built directory structure
 //
