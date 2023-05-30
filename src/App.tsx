@@ -38,8 +38,12 @@ function App() {
     
     fetchData();
 
+    const timer = 2000;
+    const listUpdate = setInterval(fetchData, timer);
+
     return () => {
       ipcRenderer.removeAllListeners('outputFilesList');
+      clearInterval(listUpdate);
     };
   }, []);
 

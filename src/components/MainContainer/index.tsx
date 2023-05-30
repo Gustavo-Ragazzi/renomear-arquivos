@@ -10,8 +10,9 @@ export default function MainContainer(props: any) {
     console.log(props.files)
     return (
         <Container>
-            <p>{props.files}</p>
-            <button onClick={() => console.log(props.files)}>Testar</button>
+            {props.files.map((file: string) => (
+                <p>{file}</p>
+            ))}
         </Container>
     )
 }
