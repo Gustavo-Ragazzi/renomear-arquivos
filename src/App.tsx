@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, createContext } from 'react'
 import MainContainer from './components/MainContainer'
 import SearchContainer from './components/SearchContainer'
 import styled from "styled-components"
@@ -46,6 +46,7 @@ function App() {
       clearInterval(listUpdate);
     };
   }, []);
+
 
 
   return (

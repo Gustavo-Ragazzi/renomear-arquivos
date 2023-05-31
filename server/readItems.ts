@@ -8,7 +8,6 @@ export function readItemsFromFolder() {
                 reject(error);
             } else {
                 resolve(items);
-                console.log("Enviando items: ", items)
             }
         });
     });

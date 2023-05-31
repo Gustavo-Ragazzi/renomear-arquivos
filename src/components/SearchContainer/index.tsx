@@ -1,6 +1,7 @@
 import { ipcRenderer } from "electron";
 import styled from "styled-components"
 import { CiImport, CiExport, CiEdit } from "react-icons/Ci"
+import { useState } from "react";
 
 const Container = styled.div`
     width: 50%;
@@ -25,6 +26,7 @@ const RenameContainer = styled.div`
 `
 
 export default function SearchContainer() {
+    const [newNames, setNewNames] = useState<string[]>([]);
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -38,6 +40,14 @@ export default function SearchContainer() {
     function disableButtonAlert() {
         alert("Funcionalidade ainda não implementada")
     }
+
+    function handleRenameClick() {
+        const inputs= Array.from(document.querySelectorAll<HTMLInputElement>("input[name='newName']"));
+        const values = inputs.map((input: HTMLInputElement) => input.value)
+        setNewNames(values);
+        console.log(`Lista de nomes: ${newNames}`);
+        ipcRenderer.send("newNamesList", newNames);
+      }
 
     return (
         <Container>
@@ -54,7 +64,7 @@ export default function SearchContainer() {
                 <button onClick={disableButtonAlert} type="button" className="btn btn-primary">Importar JSON<CiImport /></button>
             </ExpImpDiv>
             <RenameContainer>
-                <button type="button" className="btn btn-primary">Renomear<CiEdit /></button>
+                <button type="button" className="btn btn-primary" onClick={handleRenameClick}>Renomear<CiEdit /></button>
             </RenameContainer>
         </Container>
     )

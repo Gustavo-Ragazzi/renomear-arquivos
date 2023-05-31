@@ -42,12 +42,13 @@ const FileName = styled.p`
 `
 
 const NewNameInput = styled.input`
+    background-color:#424549;
+    border: 1px solid #373a40;
     width: 100%;
+    color: #c6c1c1;
 `
 
 export default function MainContainer(props: any) {
-    console.log(props.files)
-
     return (
         <Container>
             <Table>
@@ -58,7 +59,7 @@ export default function MainContainer(props: any) {
                                 <FileName key={file + "-p"}>{file}</FileName>
                             </FileNameCell>
                             <NewNameInputCell>
-                                <NewNameInput />
+                                <NewNameInput name="newName"/>
                             </NewNameInputCell>
                             <ButtonCell>
                                 <Button type="button" className="btn-close" aria-label="Close" onClick={() => ipcRenderer.send("deleteFile", file)}></Button>

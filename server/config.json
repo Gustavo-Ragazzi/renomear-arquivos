@@ -1,3 +1,4 @@
 {
-    "inputPath": "D:/CSV/Projetos/renomear-arquivos/input" 
+    "inputPath": "D:/CSV/Projetos/renomear-arquivos/input",
+    "outputPath": "D:/CSV/Projetos/renomear-arquivos/output"
 }
