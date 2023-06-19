@@ -22,11 +22,12 @@ const ExpImpDiv = styled.div`
 const RenameContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 50%;
+    margin-top: 20vh;
 `
 
 export default function SearchContainer() {
     const [newNames, setNewNames] = useState<string[]>([]);
+    const [renameSucess, setRenameSucess] = useState<boolean | null>(null);
 
     const handleSubmit = (event: any) => {
         event.preventDefault();
@@ -47,7 +48,7 @@ export default function SearchContainer() {
         setNewNames(values);
         console.log(`Lista de nomes: ${newNames}`);
         ipcRenderer.send("newNamesList", newNames);
-      }
+    };
 
     return (
         <Container>

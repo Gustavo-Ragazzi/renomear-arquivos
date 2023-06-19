@@ -16,7 +16,6 @@ const AppContainer = styled.body`
 
 function App() {
   const [files, setFiles] = useState<string[]>([]);
-  const [isFilesReceived, setIsFilesReceived] = useState(false);
 
   useEffect(() => {
     const fetchData = async() => {
@@ -24,7 +23,6 @@ function App() {
         const items = await readItemsFromFolder();
         if(Array.isArray(items)) {
           setFiles(items);
-          setIsFilesReceived(true);
         }
       } catch (error) {
         console.log(error);
@@ -33,7 +31,6 @@ function App() {
   
     ipcRenderer.on('outputFilesList', (event, outputFilesList) => {
       setFiles(outputFilesList);
-      setIsFilesReceived(true);
     });
     
     fetchData();
@@ -47,15 +44,9 @@ function App() {
     };
   }, []);
 
-
-
   return (
     <AppContainer>
-      {isFilesReceived ? (
-        <MainContainer files={files} />
-      ) : (
-        <p>Loading...</p>
-      )}
+      <MainContainer files={files}/>
       <SearchContainer />
     </AppContainer>
   )

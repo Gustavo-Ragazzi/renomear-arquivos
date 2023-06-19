@@ -1,10 +1,12 @@
 import { ipcRenderer } from "electron"
 import styled from "styled-components"
+import { useState, useEffect, useRef } from "react"
 
 const Container = styled.main`
     background-color: #424549;
     color: #c6c1c1;
     width: 50%;
+    overflow: auto;
 `
 
 const Table = styled.table`
@@ -49,17 +51,38 @@ const NewNameInput = styled.input`
 `
 
 export default function MainContainer(props: any) {
+    const [inputValues, setInputValues] = useState<string[]>(props.files);
+    const [allowUpdates, setAllowUpdates] = useState<boolean>(true);
+    const initialFilesList = useRef<string[]>(props.files); 
+
+    const handleInputChange = (index: number, value: string) => {
+        const updatedInputValues = [ ...inputValues ];
+        updatedInputValues[index] = value;
+        setInputValues(updatedInputValues);
+        setAllowUpdates(false);
+    }
+
+    useEffect(() => {
+        if(allowUpdates && JSON.stringify(initialFilesList.current) != JSON.stringify(props.files)) {
+            setInputValues(props.files);
+        }
+    }, [props.files]);
+
     return (
         <Container>
             <Table>
                 <tbody>
-                    {props.files.map((file: string) => (
+                    {props.files.map((file: string, index: number) => (
                         <TableRow key={file}>
                             <FileNameCell>
                                 <FileName key={file + "-p"}>{file}</FileName>
                             </FileNameCell>
                             <NewNameInputCell>
-                                <NewNameInput name="newName"/>
+                                <NewNameInput
+                                    name="newName"
+                                    value={inputValues[index]}
+                                    onChange={(e) => handleInputChange(index, e.target.value)}
+                                />
                             </NewNameInputCell>
                             <ButtonCell>
                                 <Button type="button" className="btn-close" aria-label="Close" onClick={() => ipcRenderer.send("deleteFile", file)}></Button>
